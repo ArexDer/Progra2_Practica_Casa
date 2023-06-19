@@ -19,14 +19,14 @@ public class Habitacion {
 	@GeneratedValue(generator = "seq_habitacion", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "seq_habitacion", sequenceName = "seq_habitacion", allocationSize = 1)
 	@Id
-	@Column(name = "empl_id")
+	@Column(name = "hab_id")
 	private Integer id;
 
 	//atributos logicos que el usuario conoce
-	@Column(name = "empl_numero")
+	@Column(name = "hab_numero")
 	private String numero;
 	
-	@Column(name = "empl_valor")
+	@Column(name = "hab_valor")
 	private BigDecimal valor;
 	
 	@ManyToOne
@@ -51,6 +51,14 @@ public class Habitacion {
 	}
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+	}
+	
+	
+	public Hotel getHotel() {
+		return hotel;
+	}
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
 	}
 	@Override
 	public String toString() {
