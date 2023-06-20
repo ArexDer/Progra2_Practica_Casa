@@ -37,7 +37,8 @@ public class HotelRepositoryImpl implements HotelRepository {
 
 	@Override
 	public Hotel seleccionarPorIdHotel(Integer id) {
-		// TODO Auto-generated method stub
+		
+		//System.out.println(this.entityManager.find(Hotel.class, id));
 		return this.entityManager.find(Hotel.class, id);
 	}
 
