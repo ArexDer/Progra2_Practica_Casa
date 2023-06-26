@@ -1,26 +1,27 @@
 package com.example.demo;
 
 
+
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Month;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.repository.modelo.Ciudadano;
-import com.example.demo.repository.modelo.Empleado;
-import com.example.demo.service.CiudadanoService;
-import com.example.demo.service.EmpleadoService;
+import com.example.demo.repository.modelo.Fruta;
+import com.example.demo.service.FrutaService;
+
 
 @SpringBootApplication
 public class Progra2PracticaCasaApplication implements CommandLineRunner {
 	
+	
 	@Autowired
-	private EmpleadoService empleadoService;
-
-	@Autowired
-	private CiudadanoService ciudadanoService;
+	private FrutaService frutaService;
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(Progra2PracticaCasaApplication.class, args);
@@ -29,43 +30,48 @@ public class Progra2PracticaCasaApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		//main
-		Empleado e1 = new Empleado();
-		Ciudadano c1 = new Ciudadano();
+		
+		Fruta f = new Fruta();
+		
+		f.setNombre("Sandia");
+		f.setPeso(3.24);
+		f.setTipo("Templado");
+		f.setPrecio(new BigDecimal(3.25));
+		f.setPaisOrigen("Latam");
+		
+		f.setFechallegada(LocalDate.now());  //FECHA DE INGRESO
+		f.setFechaCaducidad(LocalDate.of(2023, Month.AUGUST, 5)); //FECHA DE CADUCIDAD
+		this.frutaService.insertar(f);
 		
 		
-		e1.setCargo("Pasante");
-		e1.setSueldo(new BigDecimal(300));
-		
-		c1.setNombre("Diego");
-		c1.setApellido("Rivas");
-		c1.setCedula("123456789");
-		
-		c1.setEmpleado(e1);
-		e1.setCiudadano(c1);
-		
-		this.ciudadanoService.agregar(c1);
-		this.ciudadanoService.buscarPorId(2);
-		
-		Ciudadano c2 = new Ciudadano();
-		
-		c2.setNombre("Persona");
-		c2.setApellido("Ec");
-		c2.setCedula("000002");
-		e1.setCiudadano(c2);
-		this.empleadoService.actualizar(e1);
-		
-		this.empleadoService.borrar(2);
 		
 	
-		
-		
-		
+		//PRIMERA CONSULTA
+		System.out.println("Ejemplo de Query con single result");
+		System.out.println(this.frutaService.seleccionarPorNombrePais("Ecuador"));
 
-	
+		//SEGUNDA CONSULTA
+		System.out.println("---------------------------------------");
+		System.out.println("Ejemplo de Query con result list");
+		System.out.println(this.frutaService.seleccionarListaPorPrecio(new BigDecimal(0.50)));
 		
+		//List<Fruta> listaFrutas = this.frutaService.seleccionarListaPorPrecio(new BigDecimal(0.50));
+		//for(Fruta fru: listaFrutas) {
+		//	System.out.println(fru);
+		//} UNA MANERA DE VERLO PERO TODO ESTO DEBE ESTAR DEBAJO DE LA CAPA CONTROLLER
 		
+		//TERCERA CONSULTA TYPE
+		System.out.println("---------------------------------------");
+		System.out.println("Ejemplo de TypedQuery con single result");
+		System.out.println(this.frutaService.seleccionarPorNombrePaisTyped("Brazil"));
+
+/*
+		//CURATA CONSULTA TYPE
+		System.out.println("---------------------------------------");
+		System.out.println("Ejemplo de TypedQuery con result list");
+		System.out.println(this.frutaService.seleccionarListaPorFecha(LocalDate.of(2023, Month.AUGUST, 5)));
 		
-		
+*/		
 		
 	}
 
