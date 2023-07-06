@@ -79,4 +79,16 @@ public class FrutaServiceImpl implements FrutaService {
 		return this.frutaRepository.seleccionarFrutaDinamico(pais, precio, peso);
 	}
 
+	@Override
+	public int borrarPorPais(String paisOrigen) {
+		// TODO Auto-generated method stub
+		return this.frutaRepository.eliminarPorPais(paisOrigen);
+	}
+
+	@Override
+	public int actualizarPorNombre(String nombre, String paisOrigen, BigDecimal precio) {
+		// TODO Auto-generated method stub
+		return this.frutaRepository.actualizarPorNombre(nombre, paisOrigen, precio);
+	}
+
 }

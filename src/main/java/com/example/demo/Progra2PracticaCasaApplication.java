@@ -44,6 +44,7 @@ public class Progra2PracticaCasaApplication implements CommandLineRunner {
 		this.frutaService.insertar(f);
 		*/		
 		
+		/*
 		//BUSQUEDA CON QUERY DINAMICA
 		System.out.println("Busqueda Dinamica AND");
 		System.out.println(this.frutaService.BuscarFrutaDinamico("Ecuador",new BigDecimal(14.20),9.5));
@@ -52,10 +53,18 @@ public class Progra2PracticaCasaApplication implements CommandLineRunner {
 		System.out.println("Busqueda Dinamica OR");
 		System.out.println(this.frutaService.BuscarFrutaDinamico("Brazil",new BigDecimal(0.50),3.88));
                                                                 //PAIS      PRECIO         PESO
+                                                                 
+        */
+		
+		// DELETE  Y UPDATE
+		System.out.println("Eliminar por Pais de Origen de la FRUTA");
+		System.out.println(this.frutaService.borrarPorPais("Latam"));
 
-		//System.out.println("Busqueda Dinamica DEBAJO DEL RANGO O SUPERIOR AL RANGO");
-		//System.out.println(this.frutaService.BuscarFrutaDinamico("Ecuador",new BigDecimal(14.20),9.5));
-		                                                          //PAIS      PRECIO         PESO
+		System.out.println("Actualizar por Nombre los atributos de Pais de origen y precio ");
+		System.out.println(this.frutaService.actualizarPorNombre("Mango", "Brazil", new BigDecimal(0.85)));
+		
+
+	
 		
 		
 

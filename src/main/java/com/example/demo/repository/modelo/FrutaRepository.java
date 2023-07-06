@@ -29,5 +29,16 @@ public interface FrutaRepository {
 	//------------Querys dinamicas    
 	public Fruta seleccionarFrutaDinamico(String pais, BigDecimal precio, Double peso);
 	//Busqueda por Pais y precio  en donde mi Or y AND tiene que ver con el PRECIO del producto
+	
+	
+	//-------------BORRAR Y ACTUALIZAR 
+	public int eliminarPorPais(String paisOrigen);
+	//Borrar por nombre de mi frtuta
+
+	public int actualizarPorNombre(String nombre,String paisOrigen, BigDecimal precio);
+	//Actualizar el pais y el precio de mi fruta(nombre)
+	
+	
+	
 
 }

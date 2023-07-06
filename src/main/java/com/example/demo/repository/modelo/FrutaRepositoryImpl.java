@@ -151,4 +151,24 @@ public class FrutaRepositoryImpl implements FrutaRepository {
 				return myQueryFinal.getSingleResult();
 	}
 
+	@Override
+	public int eliminarPorPais(String paisOrigen) {
+		
+				Query myQuery = this.entityManager.createQuery("DELETE from Fruta f where f.paisOrigen = :datoPaisOrigen");
+				myQuery.setParameter("datoPaisOrigen", paisOrigen);
+				return myQuery.executeUpdate();
+				//ME IMPRIME EL NUMERO DE REGISTROS ELIMINADOS
+	}
+
+	@Override
+	public int actualizarPorNombre(String nombre, String paisOrigen, BigDecimal precio) {
+		
+				Query myQuery = this.entityManager.createQuery("UPDATE Fruta f SET f.paisOrigen = :datoPaisOrigen, f.precio = :datoPrecio WHERE f.nombre = :datoNombre");
+				myQuery.setParameter("datoPaisOrigen", paisOrigen);
+				myQuery.setParameter("datoPrecio", precio);
+				myQuery.setParameter("datoNombre", nombre);
+				
+				return myQuery.executeUpdate();// numero de registros afectados
+	}
+
 }
