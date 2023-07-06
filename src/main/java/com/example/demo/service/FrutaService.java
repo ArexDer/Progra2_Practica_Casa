@@ -27,5 +27,7 @@ public interface FrutaService {
 	public Fruta seleccionarPorNombrePaisTyped(String nombre);
 	
 	public List<Fruta> seleccionarListaPorFecha(LocalDate fechaC);
+	
+	public Fruta BuscarFrutaDinamico(String pais, BigDecimal precio, Double peso);
 
 }

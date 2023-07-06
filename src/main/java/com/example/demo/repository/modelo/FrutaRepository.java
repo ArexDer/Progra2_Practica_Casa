@@ -26,5 +26,8 @@ public interface FrutaRepository {
 	
 	public List<Fruta> seleccionarListaPorFecha(LocalDate fechaCaducidad);
 	
+	//------------Querys dinamicas    
+	public Fruta seleccionarFrutaDinamico(String pais, BigDecimal precio, Double peso);
+	//Busqueda por Pais y precio  en donde mi Or y AND tiene que ver con el PRECIO del producto
 
 }

@@ -73,4 +73,10 @@ public class FrutaServiceImpl implements FrutaService {
 		return this.seleccionarListaPorFecha(fechaCaducidad);
 	}
 
+	@Override
+	public Fruta BuscarFrutaDinamico(String pais, BigDecimal precio, Double peso) {
+		// TODO Auto-generated method stub
+		return this.frutaRepository.seleccionarFrutaDinamico(pais, precio, peso);
+	}
+
 }

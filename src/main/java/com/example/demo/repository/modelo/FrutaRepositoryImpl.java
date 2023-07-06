@@ -11,6 +11,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 
 @Repository
@@ -85,6 +89,66 @@ public class FrutaRepositoryImpl implements FrutaRepository {
 		myQuery.setParameter("datoFechaCaducidad", fechaCaducidad);
 		List<Fruta> f = myQuery.getResultList();
 		return f;
+	}
+
+	@Override
+	public Fruta seleccionarFrutaDinamico(String pais, BigDecimal precio, Double peso) {
+	
+				CriteriaBuilder myBuilder = this.entityManager.getCriteriaBuilder();
+
+				// 1.- Especificar el tipo de retorno que tiene mi Query
+				CriteriaQuery<Fruta> myCriteriaQuery = myBuilder.createQuery(Fruta.class);
+
+			
+				Root<Fruta> miTablaFrom = myCriteriaQuery.from(Fruta.class);
+
+				// Construir las condiciones de manera DINAMICA
+				//EN DONDE SI EL PRECIO ESTA SOBRE UN RANGO SE APLICA UNA BUSQUEDA,
+				//CASO CONTRARIO OTRA BUSQUEDA
+				
+				
+
+				
+				Predicate fruPais = myBuilder.equal(miTablaFrom.get("paisOrigen"), pais);
+
+				
+				Predicate fruPeso = myBuilder.equal(miTablaFrom.get("peso"), peso);
+
+				// if((peso.compareTo(new Double(0)) <= 0))<= 0{// se raya el double cuando es
+				// innecesario o esta obsoleto
+
+				Predicate predicadoFinal = null;
+				
+                BigDecimal valor1, valor2;
+			
+
+                valor1= new BigDecimal(2.10);
+                
+                valor2= new BigDecimal(4.00);
+                
+                /*
+                 *   1 Cuando el primer valor BigDecimal sea mayor que el segundo valor BigDecimal.
+                     0 Cuando el primer valor BigDecimal sea igual que el segundo valor BigDecimal.
+                    -1 Cuando el primer valor BigDecimal sea menor que el segundo valor BigDecimal.
+                 */
+				
+				if (precio.compareTo(valor1)==1 && precio.compareTo(valor2)== -1)  {
+					
+					predicadoFinal = myBuilder.or(fruPais, fruPeso);
+					
+				} else {
+					
+					predicadoFinal = myBuilder.and(fruPais, fruPeso);
+				
+				}
+
+				//CONSULTA FINAL
+				myCriteriaQuery.select(miTablaFrom).where(predicadoFinal);
+
+				TypedQuery<Fruta> myQueryFinal = this.entityManager.createQuery(myCriteriaQuery); 
+																										
+				// 5.-AL FINAL LA QUERY LA REALIZAMOS CON TYPED
+				return myQueryFinal.getSingleResult();
 	}
 
 }

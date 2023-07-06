@@ -30,7 +30,7 @@ public class Progra2PracticaCasaApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		//main
-		
+		/*
 		Fruta f = new Fruta();
 		
 		f.setNombre("Sandia");
@@ -42,36 +42,23 @@ public class Progra2PracticaCasaApplication implements CommandLineRunner {
 		f.setFechallegada(LocalDate.now());  //FECHA DE INGRESO
 		f.setFechaCaducidad(LocalDate.of(2023, Month.AUGUST, 5)); //FECHA DE CADUCIDAD
 		this.frutaService.insertar(f);
+		*/		
 		
+		//BUSQUEDA CON QUERY DINAMICA
+		System.out.println("Busqueda Dinamica AND");
+		System.out.println(this.frutaService.BuscarFrutaDinamico("Ecuador",new BigDecimal(14.20),9.5));
+                                                                //PAIS      PRECIO         PESO
 		
-		
-	
-		//PRIMERA CONSULTA
-		System.out.println("Ejemplo de Query con single result");
-		System.out.println(this.frutaService.seleccionarPorNombrePais("Ecuador"));
+		System.out.println("Busqueda Dinamica OR");
+		System.out.println(this.frutaService.BuscarFrutaDinamico("Brazil",new BigDecimal(0.50),3.88));
+                                                                //PAIS      PRECIO         PESO
 
-		//SEGUNDA CONSULTA
-		System.out.println("---------------------------------------");
-		System.out.println("Ejemplo de Query con result list");
-		System.out.println(this.frutaService.seleccionarListaPorPrecio(new BigDecimal(0.50)));
+		//System.out.println("Busqueda Dinamica DEBAJO DEL RANGO O SUPERIOR AL RANGO");
+		//System.out.println(this.frutaService.BuscarFrutaDinamico("Ecuador",new BigDecimal(14.20),9.5));
+		                                                          //PAIS      PRECIO         PESO
 		
-		//List<Fruta> listaFrutas = this.frutaService.seleccionarListaPorPrecio(new BigDecimal(0.50));
-		//for(Fruta fru: listaFrutas) {
-		//	System.out.println(fru);
-		//} UNA MANERA DE VERLO PERO TODO ESTO DEBE ESTAR DEBAJO DE LA CAPA CONTROLLER
 		
-		//TERCERA CONSULTA TYPE
-		System.out.println("---------------------------------------");
-		System.out.println("Ejemplo de TypedQuery con single result");
-		System.out.println(this.frutaService.seleccionarPorNombrePaisTyped("Brazil"));
 
-/*
-		//CURATA CONSULTA TYPE
-		System.out.println("---------------------------------------");
-		System.out.println("Ejemplo de TypedQuery con result list");
-		System.out.println(this.frutaService.seleccionarListaPorFecha(LocalDate.of(2023, Month.AUGUST, 5)));
-		
-*/		
 		
 	}
 
